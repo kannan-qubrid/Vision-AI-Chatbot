@@ -106,71 +106,69 @@ def render_sidebar() -> Dict[str, Any]:
     else:
         st.sidebar.info("No conversations")
     
-    st.sidebar.divider()
     
-    # Model Settings
-    st.sidebar.title("⚙️ Settings")
-    
-    DEFAULTS = {
-        "temperature": 0.7,
-        "max_tokens": 1024,
-        "top_p": 0.9,
-        "top_k": 40,
-        "presence_penalty": 0.0
-    }
-    
-    use_defaults = st.session_state.get("use_default_params", False)
-    reset_counter = st.session_state.get("param_reset_counter", 0)
-    
-    temperature = st.sidebar.slider(
-        "Temperature",
-        min_value=0.0,
-        max_value=2.0,
-        value=DEFAULTS["temperature"] if use_defaults else st.session_state.get("_temperature", DEFAULTS["temperature"]),
-        step=0.1,
-        key=f"temperature_{reset_counter}"
-    )
-    st.session_state._temperature = temperature
-    
-    max_tokens = st.sidebar.slider(
-        "Max Tokens",
-        min_value=256,
-        max_value=4096,
-        value=DEFAULTS["max_tokens"] if use_defaults else st.session_state.get("_max_tokens", DEFAULTS["max_tokens"]),
-        step=256,
-        key=f"max_tokens_{reset_counter}"
-    )
-    st.session_state._max_tokens = max_tokens
-    
-    top_p = st.sidebar.slider(
-        "Top-P",
-        min_value=0.0,
-        max_value=1.0,
-        value=DEFAULTS["top_p"] if use_defaults else st.session_state.get("_top_p", DEFAULTS["top_p"]),
-        step=0.05,
-        key=f"top_p_{reset_counter}"
-    )
-    st.session_state._top_p = top_p
-    
-    top_k = st.sidebar.slider(
-        "Top-K",
-        min_value=1,
-        max_value=100,
-        value=DEFAULTS["top_k"] if use_defaults else st.session_state.get("_top_k", DEFAULTS["top_k"]),
-        step=1,
-        key=f"top_k_{reset_counter}"
-    )
-    st.session_state._top_k = top_k
-    
-    presence_penalty = st.sidebar.slider(
-        "Presence Penalty",
-        min_value=-2.0,
-        max_value=2.0,
-        value=DEFAULTS["presence_penalty"] if use_defaults else st.session_state.get("_presence_penalty", DEFAULTS["presence_penalty"]),
-        step=0.1,
-        key=f"presence_penalty_{reset_counter}"
-    )
-    st.session_state._presence_penalty = presence_penalty
+    # Model Settings - Collapsible
+    with st.sidebar.expander("⚙️ Model Settings", expanded=False):
+        DEFAULTS = {
+            "temperature": 0.7,
+            "max_tokens": 1024,
+            "top_p": 0.9,
+            "top_k": 40,
+            "presence_penalty": 0.0
+        }
+        
+        use_defaults = st.session_state.get("use_default_params", False)
+        reset_counter = st.session_state.get("param_reset_counter", 0)
+        
+        temperature = st.slider(
+            "Temperature",
+            min_value=0.0,
+            max_value=2.0,
+            value=DEFAULTS["temperature"] if use_defaults else st.session_state.get("_temperature", DEFAULTS["temperature"]),
+            step=0.1,
+            key=f"temperature_{reset_counter}"
+        )
+        st.session_state._temperature = temperature
+        
+        max_tokens = st.slider(
+            "Max Tokens",
+            min_value=256,
+            max_value=4096,
+            value=DEFAULTS["max_tokens"] if use_defaults else st.session_state.get("_max_tokens", DEFAULTS["max_tokens"]),
+            step=256,
+            key=f"max_tokens_{reset_counter}"
+        )
+        st.session_state._max_tokens = max_tokens
+        
+        top_p = st.slider(
+            "Top-P",
+            min_value=0.0,
+            max_value=1.0,
+            value=DEFAULTS["top_p"] if use_defaults else st.session_state.get("_top_p", DEFAULTS["top_p"]),
+            step=0.05,
+            key=f"top_p_{reset_counter}"
+        )
+        st.session_state._top_p = top_p
+        
+        top_k = st.slider(
+            "Top-K",
+            min_value=1,
+            max_value=100,
+            value=DEFAULTS["top_k"] if use_defaults else st.session_state.get("_top_k", DEFAULTS["top_k"]),
+            step=1,
+            key=f"top_k_{reset_counter}"
+        )
+        st.session_state._top_k = top_k
+        
+        presence_penalty = st.slider(
+            "Presence Penalty",
+            min_value=-2.0,
+            max_value=2.0,
+            value=DEFAULTS["presence_penalty"] if use_defaults else st.session_state.get("_presence_penalty", DEFAULTS["presence_penalty"]),
+            step=0.1,
+            key=f"presence_penalty_{reset_counter}"
+        )
+        st.session_state._presence_penalty = presence_penalty
     
     st.sidebar.divider()
     
