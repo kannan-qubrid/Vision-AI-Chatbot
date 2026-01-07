@@ -11,7 +11,7 @@ from typing import Dict, Any
 from backend.chain import VisionChain
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.messages import HumanMessage, AIMessage
-from frontend.ui_components import render_sidebar
+from frontend.ui_components import render_sidebar, render_welcome_screen
 from frontend.base_config import get_base_css
 
 # Page configuration
@@ -136,17 +136,12 @@ def main():
         </div>
     """, unsafe_allow_html=True)
     
-    # Render sidebar and get model config
+    # Render sidebar and get model config + uploaded file
     model_config = render_sidebar()
+    uploaded_file = model_config.pop("uploaded_file", None)
     
+    # Add divider for visual separation
     st.divider()
-    
-    # Image upload section
-    uploaded_file = st.file_uploader(
-        "Upload Image",
-        type=["png", "jpg", "jpeg"],
-        help="Upload an image to analyze"
-    )
     
     # Handle image upload
     if uploaded_file is not None:
@@ -161,14 +156,13 @@ def main():
             st.success(f"New conversation: {uploaded_file.name}")
 
     
-    st.divider()
-    
     # Main chat area
     active_conv = get_active_conversation()
     
     if active_conv:
-        # Display image
-        st.image(active_conv["image"], width="stretch")
+        # Display image in collapsible section
+        with st.expander("🖼️ View Image", expanded=False):
+            st.image(active_conv["image"], width=200)
         
         st.divider()
         
@@ -228,6 +222,10 @@ def main():
                 
                 except Exception as e:
                     message_placeholder.error(f"Error: {str(e)}")
+    else:
+        # Show welcome screen when no conversation is active
+        render_welcome_screen()
+
 
 
 if __name__ == "__main__":

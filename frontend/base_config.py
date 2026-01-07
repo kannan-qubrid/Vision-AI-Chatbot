@@ -60,11 +60,37 @@ def get_base_css() -> str:
         .main {
             overflow-anchor: none;
         }
+        
+        /* Center and size images in chat interface */
+        .main img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 200px !important;
+            max-height: 200px !important;
+            width: auto !important;
+            height: auto !important;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        
+        /* Force Streamlit image container to be small */
+        .main [data-testid="stImage"] {
+            max-width: 200px !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Style the expander for image */
+        .streamlit-expanderHeader {
+            font-size: 14px;
+            font-weight: 500;
+        }
     </style>
     """
 
 
-# Font size constants (to be updated based on Figma)
+# Font size constants 
 FONT_SIZES = {
     "app_title": "42px",           # Main app title
     "section_header": "18px",      # Sidebar section headers

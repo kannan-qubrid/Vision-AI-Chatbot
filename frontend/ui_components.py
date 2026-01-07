@@ -6,6 +6,56 @@ import streamlit as st
 from typing import Dict, Any
 
 
+def render_welcome_screen():
+    """Render welcome screen when no conversation is active."""
+    
+    # Add some top padding
+    st.write("")
+    st.write("")
+    
+    # Center content
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col2:
+        # Icon with gradient background - smaller size
+        st.markdown("""
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="
+                    width: 64px;
+                    height: 64px;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    border-radius: 50%;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                ">
+                    <span style="font-size: 32px;">💬</span>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # Title - smaller
+        st.markdown("<h1 style='text-align: center; font-size: 28px; font-weight: 600; margin: 0 0 0.75rem 0; color: #000000;'>Welcome to Visual AI</h1>", unsafe_allow_html=True)
+        
+        # Subtitle - smaller
+        st.markdown("<p style='text-align: center; font-size: 14px; color: #666666; margin: 0 0 2rem 0; line-height: 1.5;'>Start a new conversation by uploading an image and asking questions about it</p>", unsafe_allow_html=True)
+        
+        # How it works box - more compact
+        st.markdown("""
+            <div style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); border: 1px solid #d4e3fc; border-radius: 10px; padding: 1.5rem;">
+                <h3 style="font-size: 16px; font-weight: 600; margin: 0 0 1rem 0; text-align: center; color: #000000;">How it works:</h3>
+                <p style="margin-bottom: 0.75rem; color: #333333; font-size: 14px;"><strong style="color: #667eea;">1.</strong> Click "New Chat" to start a conversation</p>
+                <p style="margin-bottom: 0.75rem; color: #333333; font-size: 14px;"><strong style="color: #667eea;">2.</strong> Upload an image (PNG, JPG, or JPEG)</p>
+                <p style="margin-bottom: 0.75rem; color: #333333; font-size: 14px;"><strong style="color: #667eea;">3.</strong> Ask questions about your image in natural language</p>
+                <p style="margin-bottom: 0; color: #333333; font-size: 14px;"><strong style="color: #667eea;">4.</strong> Adjust model parameters in the sidebar to customize responses</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+
+
+
+
 def render_sidebar() -> Dict[str, Any]:
     """Render sidebar with conversation history and model controls."""
     
@@ -124,6 +174,15 @@ def render_sidebar() -> Dict[str, Any]:
     
     st.sidebar.divider()
     
+    # Image Upload Section
+    uploaded_file = st.sidebar.file_uploader(
+        "📤 Upload Image",
+        type=["png", "jpg", "jpeg"],
+        help="Upload an image to start a new conversation"
+    )
+    
+    st.sidebar.divider()
+    
     # Action buttons
     col1, col2 = st.sidebar.columns(2)
     
@@ -148,5 +207,6 @@ def render_sidebar() -> Dict[str, Any]:
         "max_tokens": max_tokens,
         "top_p": top_p,
         "top_k": top_k,
-        "presence_penalty": presence_penalty
+        "presence_penalty": presence_penalty,
+        "uploaded_file": uploaded_file
     }
