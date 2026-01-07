@@ -154,11 +154,8 @@ Adjust these parameters in the sidebar to control model behavior:
 ## Configuration
 
 ### Environment Variables
-
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `QUBRID_API_KEY` | Yes | - | Your Qubrid AI API key |
-| `QUBRID_API_BASE` | No | Qubrid API base URL |
+`QUBRID_API_KEY` -  Your Qubrid AI API key 
+`QUBRID_API_BASE` -  Qubrid API base URL 
 
 ### Model Defaults
 
