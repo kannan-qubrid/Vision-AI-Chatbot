@@ -9,46 +9,41 @@ from typing import Dict, Any
 def render_welcome_screen():
     """Render welcome screen when no conversation is active."""
     
-    # Add some top padding
-    st.write("")
-    st.write("")
-    
-    # Center content
+    # Center content horizontally
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        # Icon with gradient background - smaller size
+        # Title with icon on the right side
         st.markdown("""
-            <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                <h1 style="font-size: 36px; font-weight: 700; margin: 0; color: #FFFFFF;">Welcome to Visual AI</h1>
                 <div style="
-                    width: 64px;
-                    height: 64px;
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    width: 48px;
+                    height: 48px;
+                    background: linear-gradient(135deg, #9a1b74 0%, #ff6ec7 100%);
                     border-radius: 50%;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                    box-shadow: 0 4px 12px rgba(154, 27, 116, 0.3);
+                    margin-left: 1rem;
                 ">
-                    <span style="font-size: 32px;">💬</span>
+                    <span style="font-size: 24px;">💬</span>
                 </div>
             </div>
         """, unsafe_allow_html=True)
         
-        # Title - smaller
-        st.markdown("<h1 style='text-align: center; font-size: 28px; font-weight: 600; margin: 0 0 0.75rem 0; color: #000000;'>Welcome to Visual AI</h1>", unsafe_allow_html=True)
+        # Subtitle - larger
+        st.markdown("<p style='text-align: center; font-size: 16px; color: #E0E0E0; margin: 0 0 2rem 0; line-height: 1.6;'>Start a new conversation by uploading an image and asking questions about it</p>", unsafe_allow_html=True)
         
-        # Subtitle - smaller
-        st.markdown("<p style='text-align: center; font-size: 14px; color: #666666; margin: 0 0 2rem 0; line-height: 1.5;'>Start a new conversation by uploading an image and asking questions about it</p>", unsafe_allow_html=True)
-        
-        # How it works box - more compact
+        # How it works box - compact with larger title
         st.markdown("""
-            <div style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); border: 1px solid #d4e3fc; border-radius: 10px; padding: 1.5rem;">
-                <h3 style="font-size: 16px; font-weight: 600; margin: 0 0 1rem 0; text-align: center; color: #000000;">How it works:</h3>
-                <p style="margin-bottom: 0.75rem; color: #333333; font-size: 14px;"><strong style="color: #667eea;">1.</strong> Click "New Chat" to start a conversation</p>
-                <p style="margin-bottom: 0.75rem; color: #333333; font-size: 14px;"><strong style="color: #667eea;">2.</strong> Upload an image (PNG, JPG, or JPEG)</p>
-                <p style="margin-bottom: 0.75rem; color: #333333; font-size: 14px;"><strong style="color: #667eea;">3.</strong> Ask questions about your image in natural language</p>
-                <p style="margin-bottom: 0; color: #333333; font-size: 14px;"><strong style="color: #667eea;">4.</strong> Adjust model parameters in the sidebar to customize responses</p>
+            <div style="background: linear-gradient(135deg, #9a1b74 0%, #ff6ec7 100%); border: 1px solid #9a1b74; border-radius: 10px; padding: 1.5rem;">
+                <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 1rem 0; text-align: center; color: #FFFFFF; text-transform: uppercase; letter-spacing: 1px;">How it works</h3>
+                <p style="margin-bottom: 0.75rem; color: #F0F0F0; font-size: 15px; line-height: 1.5;"><strong style="color: #FFFFFF;">1.</strong> Click "New Chat" to start a conversation</p>
+                <p style="margin-bottom: 0.75rem; color: #F0F0F0; font-size: 15px; line-height: 1.5;"><strong style="color: #FFFFFF;">2.</strong> Upload an image (PNG, JPG, or JPEG)</p>
+                <p style="margin-bottom: 0.75rem; color: #F0F0F0; font-size: 15px; line-height: 1.5;"><strong style="color: #FFFFFF;">3.</strong> Ask questions about your image in natural language</p>
+                <p style="margin-bottom: 0; color: #F0F0F0; font-size: 15px; line-height: 1.5;"><strong style="color: #FFFFFF;">4.</strong> Adjust model parameters in the sidebar to customize responses</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -170,7 +165,6 @@ def render_sidebar() -> Dict[str, Any]:
         )
         st.session_state._presence_penalty = presence_penalty
     
-    st.sidebar.divider()
     
     # Image Upload Section
     uploaded_file = st.sidebar.file_uploader(
@@ -185,13 +179,13 @@ def render_sidebar() -> Dict[str, Any]:
     col1, col2 = st.sidebar.columns(2)
     
     with col1:
-        if st.button("🔄 New Chat", width="stretch", type="primary"):
+        if st.button("🔄 New Chat", width="stretch", type="primary", key="new_chat_btn"):
             st.session_state.active_conversation_id = None
             st.session_state.chat_memory.clear()
             st.rerun()
     
     with col2:
-        if st.button("⚡ Reset", width="stretch", type="secondary"):
+        if st.button("⚡ Reset Params", width="stretch", type="secondary", key="reset_params_btn"):
             st.session_state.param_reset_counter = reset_counter + 1
             for key in ["_temperature", "_max_tokens", "_top_p", "_top_k", "_presence_penalty"]:
                 if key in st.session_state:
