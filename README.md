@@ -76,7 +76,7 @@ Create a `.env` file in the project root:
 
 ```env
 QUBRID_API_KEY=your_api_key_here
-QUBRID_API_BASE=https://api.qubrid.ai/v1  # Optional, uses default if not set
+QUBRID_API_BASE=qubrid_base_url
 ```
 
 ## Usage
@@ -158,7 +158,7 @@ Adjust these parameters in the sidebar to control model behavior:
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `QUBRID_API_KEY` | Yes | - | Your Qubrid AI API key |
-| `QUBRID_API_BASE` | No | `https://api.qubrid.ai/v1` | Qubrid API base URL |
+| `QUBRID_API_BASE` | No | Qubrid API base URL |
 
 ### Model Defaults
 
@@ -183,54 +183,6 @@ This application uses Qubrid's Qwen3-VL-30B-A3B-Instruct model via their API:
 - **Input**: Text + Image (base64 encoded)
 - **Output**: Streaming text responses
 
-### Request Format
-
-```python
-{
-    "model": "Qwen3-VL-30B-A3B-Instruct",
-    "messages": [
-        {
-            "role": "system",
-            "content": "System prompt"
-        },
-        {
-            "role": "user",
-            "content": [
-                {"type": "image_url", "image_url": {"url": "data:image/..."}},
-                {"type": "text", "text": "User question"}
-            ]
-        }
-    ],
-    "stream": true,
-    "temperature": 0.7,
-    ...
-}
-```
-
-## Development
-
-### Code Style
-
-- Follow PEP 8 guidelines
-- Use type hints where applicable
-- Document functions with docstrings
-- Keep functions focused and single-purpose
-
-### Testing
-
-Test the API connection:
-
-```bash
-python test_api.py
-```
-
-### Debugging
-
-Enable Streamlit debug mode:
-
-```bash
-streamlit run app.py --logger.level=debug
-```
 
 ## Troubleshooting
 
@@ -267,13 +219,6 @@ Solution: Use PNG or JPG images only
 - Image data is base64 encoded for secure transmission
 - No persistent storage of user data
 - Session-based conversation management
-
-
-## Acknowledgments
-
-- Powered by [Qubrid AI](https://qubrid.ai)
-- Built with [LangChain](https://langchain.com)
-- UI framework: [Streamlit](https://streamlit.io)
 
 ---
 
