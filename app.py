@@ -18,7 +18,7 @@ from frontend.base_config import get_base_css
 # Page configuration
 st.set_page_config(
     page_title="Visual AI",
-    page_icon="💬",
+    page_icon="frontend/assets/qubrid_logo.png",
     layout="wide"
 )
 
