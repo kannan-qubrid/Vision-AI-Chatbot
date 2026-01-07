@@ -155,7 +155,7 @@ Adjust these parameters in the sidebar to control model behavior:
 
 ### Environment Variables
 `QUBRID_API_KEY` -  Your Qubrid AI API key 
-`QUBRID_API_BASE` -  Qubrid API base URL 
+`QUBRID_API_BASE` - https://platform.qubrid.com/api/v1/qubridai/multimodal/chat 
 
 ### Model Defaults
 
