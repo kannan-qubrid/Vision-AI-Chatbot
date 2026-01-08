@@ -1,28 +1,35 @@
 """
-Visual AI - Chat Interface
+Vision AI - Chat Interface
 Clean minimal UI - ready for redesign.
 """
 import streamlit as st
 from PIL import Image
 import time
+import base64
 from datetime import datetime
 from typing import Dict, Any
 
 from backend.chain import VisionChain
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.messages import HumanMessage, AIMessage
-from frontend.ui_components import render_sidebar
+from frontend.ui_components import render_sidebar, render_welcome_screen
 from frontend.base_config import get_base_css
 
 # Page configuration
 st.set_page_config(
-    page_title="Visual AI",
-    page_icon="💬",
+    page_title="Vision AI",
+    page_icon="frontend/assets/qubrid_logo.png",
     layout="wide"
 )
 
 # Apply global design constraints
 st.markdown(get_base_css(), unsafe_allow_html=True)
+
+
+def get_banner_base64():
+    """Load and encode banner image as base64."""
+    with open("frontend/assets/qubrid_banner.png", "rb") as f:
+        return base64.b64encode(f.read()).decode()
 
 
 def initialize_session_state():
@@ -113,40 +120,52 @@ def main():
         switch_conversation(conv_id)
         del st.session_state.switch_to_conversation
     
-    # Chat App Bar (State 2: After "New Chat")
-    # Only show when user is in chat view (not landing)
+    # Branded Header with Banner Background
     st.markdown("""
-        <div style="margin-bottom: 2rem;">
-            <h1 style="
-                font-size: 42px;
-                font-weight: 600;
-                line-height: 1.2;
-                margin: 0;
-                padding: 0;
-                color: #000000;
-            ">Visual AI Chat</h1>
-            <p style="
-                font-size: 24px;
-                font-weight: 400;
-                line-height: 1.5;
-                margin: 4px 0 0 0;
-                padding: 0;
-                color: #666666;
-            ">Ask questions about your images using advanced vision AI</p>
+        <div style="
+            background: linear-gradient(135deg, #9a1b74 0%, #ff6ec7 100%);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        ">
+            <div>
+                <h1 style="
+                    font-size: 48px;
+                    font-weight: 700;
+                    line-height: 1.1;
+                    margin: 0;
+                    padding: 0;
+                    color: #FFFFFF;
+                ">Vision AI</h1>
+                <p style="
+                    font-size: 20px;
+                    font-weight: 400;
+                    line-height: 1.4;
+                    margin: 4px 0 0 0;
+                    padding: 0;
+                    color: #F0F0F0;
+                ">Vision-based AI Chatbot</p>
+                <p style="
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 1.4;
+                    margin: 2px 0 0 0;
+                    padding: 0;
+                    color: #E0E0E0;
+                ">Powered by Qubrid AI</p>
+            </div>
+            <div style="flex-shrink: 0; margin-left: 2rem;">
+                <img src="data:image/png;base64,{banner_base64}" style="height: 80px; opacity: 0.9;" />
+            </div>
         </div>
-    """, unsafe_allow_html=True)
+    """.format(banner_base64=get_banner_base64()), unsafe_allow_html=True)
     
-    # Render sidebar and get model config
+    # Render sidebar and get model config + uploaded file
     model_config = render_sidebar()
-    
-    st.divider()
-    
-    # Image upload section
-    uploaded_file = st.file_uploader(
-        "Upload Image",
-        type=["png", "jpg", "jpeg"],
-        help="Upload an image to analyze"
-    )
+    uploaded_file = model_config.pop("uploaded_file", None)
     
     # Handle image upload
     if uploaded_file is not None:
@@ -161,14 +180,13 @@ def main():
             st.success(f"New conversation: {uploaded_file.name}")
 
     
-    st.divider()
-    
     # Main chat area
     active_conv = get_active_conversation()
     
     if active_conv:
-        # Display image
-        st.image(active_conv["image"], width="stretch")
+        # Display image in collapsible section
+        with st.expander("🖼️ View Image", expanded=False):
+            st.image(active_conv["image"], width=200)
         
         st.divider()
         
@@ -228,6 +246,10 @@ def main():
                 
                 except Exception as e:
                     message_placeholder.error(f"Error: {str(e)}")
+    else:
+        # Show welcome screen when no conversation is active
+        render_welcome_screen()
+
 
 
 if __name__ == "__main__":

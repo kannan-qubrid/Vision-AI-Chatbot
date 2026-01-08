@@ -1,6 +1,6 @@
-# Visual AI Chat
+# Vision AI Chat
 
-> A production-ready vision-based chatbot powered by Qubrid AI's advanced vision models
+> A production-ready vision-based chatbot powered by Qubrid AI's advanced vision model Qwen3-VL-30B-A3B-Instruct
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.31+-red.svg)](https://streamlit.io)
@@ -8,7 +8,31 @@
 
 ## Overview
 
-Visual AI Chat is an enterprise-grade conversational AI application that enables natural language interactions about images using Qubrid's Qwen3-VL-30B-A3B-Instruct vision model. Built with LangChain and Streamlit, it provides a clean, intuitive interface for vision-based question answering with full conversation history management.
+Vision AI Chat is an enterprise-grade conversational AI application that enables natural language interactions about images using Qubrid's Qwen3-VL-30B-A3B-Instruct vision model. Built with LangChain and Streamlit, it provides a clean, intuitive interface for vision-based question answering with full conversation history management.
+
+## UI Demo
+
+Experience the clean, modern interface of Vision AI Chat:
+
+### Homepage
+![Homepage - Clean and intuitive starting interface](frontend/assets/homepage_ui.png)
+
+### Image Upload
+![Image Upload - Seamless image integration](frontend/assets/upload_image_ui.png)
+
+### Chat Interface
+![Chat Interface - Real-time conversation with vision AI](frontend/assets/chat_interface_ui.png)
+
+![Advanced Chat View - Multi-turn conversations with context](frontend/assets/chat_interface_ui_2.png)
+
+### Sidebar Controls
+<img src="frontend/assets/sidebar_ui.png" alt="Sidebar Controls - Easy conversation management" width="50%">
+
+### Conversation History
+<img src="frontend/assets/conversation_history.png" alt="Conversation History - Track all your chat sessions" width="50%">
+
+### Model Settings
+<img src="frontend/assets/model_settings.png" alt="Model Settings - Fine-tune AI parameters" width="50%">
 
 ### Key Features
 
@@ -21,18 +45,7 @@ Visual AI Chat is an enterprise-grade conversational AI application that enables
 
 ## Architecture
 
-```
-Visual AI Chat
-├── app.py                 # Main application entry point
-├── backend/
-│   ├── chain.py          # VisionChain orchestration layer
-│   ├── qubrid_client.py  # Qubrid API client wrapper
-│   ├── prompt.py         # System prompts and templates
-│   └── utils.py          # Utility functions
-└── frontend/
-    ├── ui_components.py  # Sidebar and UI components
-    └── base_config.py    # Global UI configuration
-```
+![Architecture Diagram](frontend/assets/Architecture.png)
 
 ### Technology Stack
 
