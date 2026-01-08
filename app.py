@@ -1,5 +1,5 @@
 """
-Visual AI - Chat Interface
+Vision AI - Chat Interface
 Clean minimal UI - ready for redesign.
 """
 import streamlit as st
@@ -17,7 +17,7 @@ from frontend.base_config import get_base_css
 
 # Page configuration
 st.set_page_config(
-    page_title="Visual AI",
+    page_title="Vision AI",
     page_icon="frontend/assets/qubrid_logo.png",
     layout="wide"
 )
@@ -139,7 +139,7 @@ def main():
                     margin: 0;
                     padding: 0;
                     color: #FFFFFF;
-                ">Visual AI</h1>
+                ">Vision AI</h1>
                 <p style="
                     font-size: 20px;
                     font-weight: 400;

@@ -16,7 +16,7 @@ def render_welcome_screen():
         # Title with icon on the right side
         st.markdown("""
             <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                <h1 style="font-size: 36px; font-weight: 700; margin: 0; color: #FFFFFF;">Welcome to Visual AI</h1>
+                <h1 style="font-size: 36px; font-weight: 700; margin: 0; color: #FFFFFF;">Welcome to Vision AI</h1>
                 <div style="
                     width: 48px;
                     height: 48px;

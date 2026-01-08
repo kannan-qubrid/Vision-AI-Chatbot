@@ -1,5 +1,5 @@
 """
-Global UI configuration for Visual AI.
+Global UI configuration for Vision AI.
 Clean, consolidated purple theme styling.
 """
 
