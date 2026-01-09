@@ -106,6 +106,17 @@ Experience the clean, modern interface of Vision AI Chat:
 
 ![Architecture Diagram](frontend/assets/Architecture.png)
 
+## API Integration
+
+### Qubrid Vision Model
+
+This application uses Qubrid's Qwen3-VL-30B-A3B-Instruct model via their API:
+
+- **Model**: `Qwen3-VL-30B-A3B-Instruct`
+- **Capabilities**: Vision understanding, multi-turn conversation, detailed image analysis
+- **Input**: Text + Image (base64 encoded)
+- **Output**: Streaming text responses
+- 
 ### Technology Stack
 
 - **Frontend**: Streamlit
@@ -157,17 +168,6 @@ DEFAULTS = {
     "presence_penalty": 0.0
 }
 ```
-
-## API Integration
-
-### Qubrid Vision Model
-
-This application uses Qubrid's Qwen3-VL-30B-A3B-Instruct model via their API:
-
-- **Model**: `Qwen3-VL-30B-A3B-Instruct`
-- **Capabilities**: Vision understanding, multi-turn conversation, detailed image analysis
-- **Input**: Text + Image (base64 encoded)
-- **Output**: Streaming text responses
 
 
 ## Troubleshooting
