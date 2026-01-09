@@ -94,13 +94,13 @@ Experience the clean, modern interface of Vision AI Chat:
 ![Advanced Chat View - Multi-turn conversations with context](frontend/assets/chat_interface_ui_2.png)
 
 ### Sidebar Controls
-<img src="frontend/assets/sidebar_ui.png" alt="Sidebar Controls - Easy conversation management" width="50%">
+<img src="frontend/assets/sidebar_ui.png" alt="Sidebar Controls - Easy conversation management" width="30%">
 
 ### Conversation History
-<img src="frontend/assets/conversation_history.png" alt="Conversation History - Track all your chat sessions" width="50%">
+<img src="frontend/assets/conversation_history.png" alt="Conversation History - Track all your chat sessions" width="30%">
 
 ### Model Settings
-<img src="frontend/assets/model_settings.png" alt="Model Settings - Fine-tune AI parameters" width="50%">
+<img src="frontend/assets/model_settings.png" alt="Model Settings - Fine-tune AI parameters" width="30%">
 
 ## Architecture
 
